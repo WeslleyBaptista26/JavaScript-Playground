@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de E-mail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .erro {
+            color: red;
+            font-size: 14px;
+        }
+        .sucesso {
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Formulário de Coleta de E-mail</h2>
+    <form id="emailForm">
+        <label for="email">Digite seu e-mail:</label>
+        <input type="text" id="email" name="email">
+        <button type="submit">Enviar</button>
+        <p id="mensagem"></p>
+    </form>
+    <script>
+        document.getElementById("emailForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let email = document.getElementById("email").value;
+            let mensagem = document.getElementById("mensagem");
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email.trim() === "") {
+                mensagem.textContent = "O campo de e-mail não pode estar vazio.";
+                mensagem.className = "erro";
+            } else if (!emailRegex.test(email)) {
+                mensagem.textContent = "Formato inválido! O e-mail deve conter '@' e um domínio válido, como exemplo@dominio.com.";
+                mensagem.className = "erro";
+            } else {
+                mensagem.textContent = "E-mail válido! Obrigado por enviar.";
+                mensagem.className = "sucesso";
+            }
+        });
+    </script>
+</body>
+</html>
